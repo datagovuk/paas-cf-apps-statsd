@@ -1,8 +1,14 @@
 ---
 applications:
-- name: metric-exporter
+- name: dgu-metric-exporter
   memory: 100M
   instances: 1
   buildpack: go_buildpack
   health-check-type: none
   no-route: true
+  env:
+    STATSD_PREFIX: dgu
+    SKIP_SSL_VALIDATION: false
+    DEBUG: false
+    UPDATE_FREQUENCY: 300
+    METRIC_TEMPLATE: "{{.Space}}.{{.App}}.{{.Metric}}"
